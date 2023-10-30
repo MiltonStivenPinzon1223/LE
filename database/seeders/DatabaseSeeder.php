@@ -2,6 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\Result;
+use App\Models\Rol;
+use App\Models\User;
+use App\Models\Word;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +18,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        Rol::factory()->create(['rol_rol'=>"Adminitrator"]);
+        Rol::factory()->create(['rol_rol'=>"Standard"]);
+        User::factory(10)->create();
+        Category::factory()->create(['cat_category'=>'office']);
+        Category::factory()->create(['cat_category'=>'cinema']);
+        Category::factory()->create(['cat_category'=>'fruits']);
+        Category::factory()->create(['cat_category'=>'Tools']);
+        Word::factory(10)->create();
+        Result::factory(10)->create();
     }
 }
