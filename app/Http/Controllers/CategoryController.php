@@ -35,10 +35,17 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::find($id);
-        return response()->json([
-            'status' => true,
-            'data' => $category
-        ]);
+        if ($category == null) {
+            return response()->json([
+                'status' => false,
+                'msg' => 'Category not found'
+            ]);
+        }else{
+            return response()->json([
+                'status' => true,
+                'data' => $category
+            ]);
+        }
     }
 
 
