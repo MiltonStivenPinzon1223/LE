@@ -16,6 +16,13 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+        $user = auth()->user();
+        if ($user->rol_id != 1) {
+            return response()->json([
+                'status' => false,
+                'msg' => 'No tienes permiso para realizar esta acción'
+            ], 403);
+        }
         $rules = ['cat_category'=>'required|string|min:1|max:100'];
         $validator = Validator::make($request->input(),$rules);
         if ($validator->fails()) {
@@ -52,6 +59,13 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
+        $user = auth()->user();
+        if ($user->rol_id != 1) {
+            return response()->json([
+                'status' => false,
+                'msg' => 'No tienes permiso para realizar esta acción'
+            ], 403);
+        }
         $category = Category::find($id);
         $rules = ['cat_category'=>'required|string|min:1|max:100'];
         $validator = Validator::make($request->input(),$rules);
@@ -68,19 +82,5 @@ class CategoryController extends Controller
         ],200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $category = Category::find($id);
-        $category->delete();
-        return response()->json([
-            'status' => true,
-            'msg' => 'Category deleted successfully'
-        ],200);
-    }
+
 }

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+    protected $username = 'use_password';
+
     function register(Request $request) {
         $rules = [
             'use_name' => 'required|string|max:100',
@@ -36,6 +38,7 @@ class AuthController extends Controller
         ],200);
     }
 
+
     function login(Request $request){
         $rules = [
             'use_email' => 'required|string|email|max:200',
@@ -48,7 +51,7 @@ class AuthController extends Controller
                 'errors'=>$validator->errors()->all()
             ],400);
         }
-        if (!Auth::attempt($request->only('use_email', 'use_password'))) {
+        if (Auth::attempt(['use_email' => $request['use_email'], 'password' => $request['use_password']])) {
             return response()->json([
                 'status' => false,
                 'errors'=>"Unauthorized"
