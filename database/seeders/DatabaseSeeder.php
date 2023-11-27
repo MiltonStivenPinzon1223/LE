@@ -18,14 +18,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Rol::factory()->create(['rol_rol'=>"Adminitrator"]);
-        Rol::factory()->create(['rol_rol'=>"Standard"]);
-        User::factory(10)->create();
-        Category::factory()->create(['cat_category'=>'office']);
-        Category::factory()->create(['cat_category'=>'cinema']);
-        Category::factory()->create(['cat_category'=>'fruits']);
-        Category::factory()->create(['cat_category'=>'Tools']);
-        Word::factory(10)->create();
-        Result::factory(10)->create();
+        // Rol::factory()->create(['rol_rol'=>"Adminitrator"]);
+        // Rol::factory()->create(['rol_rol'=>"Standard"]);
+        // User::factory(10)->create();
+        // Category::factory()->create(['cat_category'=>'office']);
+        // Category::factory()->create(['cat_category'=>'cinema']);
+        // Category::factory()->create(['cat_category'=>'fruits']);
+        // Category::factory()->create(['cat_category'=>'Tools']);
+         Word::factory(20)->create();
+        //Result::factory(100)->create();
     }
 }

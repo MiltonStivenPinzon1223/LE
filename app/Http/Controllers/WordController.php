@@ -99,6 +99,10 @@ class WordController extends Controller
     public function find()
     {
         $word = Word::inRandomOrder()->first();
+        $word1 = Word::inRandomOrder()->first();
+        $word2 = Word::inRandomOrder()->first();
+        $word['word1'] = $word1['wor_english'];
+        $word['word2'] = $word2['wor_english'];
         return response()->json([
             'status' => true,
             'data' => $word

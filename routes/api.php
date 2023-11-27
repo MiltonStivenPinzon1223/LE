@@ -30,6 +30,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('words', WordController::class);
     Route::get('/results', [ResultController::class, 'find']);
+    Route::get('/results/category', [ResultController::class, 'forCategory']);
     Route::post('/results', [ResultController::class, 'store']);
     Route::get('/word', [WordController::class, 'find']);
     Route::get('/auth/logout', [AuthController::class, 'logout']);
