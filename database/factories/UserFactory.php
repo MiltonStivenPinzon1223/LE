@@ -20,7 +20,8 @@ class UserFactory extends Factory
             'use_email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'use_password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'rol_id' => $this->faker->randomElement(DB::table('rols')->pluck('rol_id')),
+            'use_status' => 1,
+            'rol_id' => 2,
             'remember_token' => Str::random(10),
         ];
     }

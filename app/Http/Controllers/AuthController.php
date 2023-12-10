@@ -30,6 +30,7 @@ class AuthController extends Controller
             'use_email' => $request->use_email,
             'use_password' => Hash::make($request->use_password),
             'rol_id' => 2,
+            'use_status' => 1
         ]);
         return response()->json([
             'status' => true,

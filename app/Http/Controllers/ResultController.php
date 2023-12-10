@@ -53,14 +53,17 @@ class ResultController extends Controller
             $percentage = 0;
             $words = DB::table('words')->where('cat_id', $category['cat_id'])->get();
             foreach ($words as $word) {
-                $check = DB::table('results')->where("wor_id", "=", $word->wor_id)->where("use_id", "=", $user['use_id'])->get()->first();
+                $check = DB::table('results')->where("wor_id", "=", $word->wor_id)->where("use_id", "=", "11")->get()->first();
                 if ($check != null) {
                     $percentage+=1;
                 }
             }
             $cant = count($words);
-            $category['percentage'] = ($percentage / $cant) * 100;
+            $category['cat_progress'] = round(($percentage / $cant) * 100);
         }
-        return $categories;
+        $array = array(
+            "categories" => $categories,
+        );
+        return $array;
     }
 }
