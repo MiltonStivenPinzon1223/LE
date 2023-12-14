@@ -14,21 +14,12 @@ class ResultController extends Controller
     public function store(Request $request)
     {
         $user = auth()->user();
-        $rules = ['wor_id'=>'required|integer'];
-        $validator = Validator::make($request->input(),$rules);
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'errors'=>$validator->errors()->all()
-            ],400);
-        }
         $result = new result();
         $result->wor_id = $request->input()['wor_id'];
-        $result->use_id = $user['use_id'];
+        $result->use_id = $request->input()['use_id'];
         $result->save();
         return response()->json([
-            'status' => true,
-            'msg' => 'Result saved successfully'
+            'msg'=>'Result saved successfully'
         ],200);
     }
 
@@ -38,10 +29,23 @@ class ResultController extends Controller
         $results = DB::table('results')
         ->join('users', 'results.use_id', '=', 'users.use_id')
         ->join('words', 'results.wor_id', '=', 'words.wor_id')
-        ->where('users.use_id', '=', $user['use_id'])->get();
+        ->where('users.use_id', '=', 11)->get();
+        foreach ($results as $result) {
+            unset($result->res_id);
+            unset($result->use_id);
+            unset($result->wor_id);
+            unset($result->updated_at);
+            unset($result->use_name);
+            unset($result->use_email);
+            unset($result->use_password);
+            unset($result->use_status);
+            unset($result->email_verified_at);
+            unset($result->rol_id);
+            unset($result->remember_token);
+            unset($result->cat_id);
+        }
         return response()->json([
-            'status' => true,
-            'data' => $results
+            'Results' => $results
         ]);
     }
 

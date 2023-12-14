@@ -11,10 +11,9 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = auth()->user();
+        $user = User::find(11);
         return response()->json([
-            'status' => true,
-            'data' => $user,
+            'users' => array($user),
         ],200);
     }
 
@@ -49,20 +48,19 @@ class UserController extends Controller
                 'errors'=>$validator->errors()->all()
             ],400);
         }
-        $user = User::find($id);
+        $user = User::find(11);
         $user->use_name = $request->use_name;
         $user->use_email = $request->use_email;
-        $user->use_password = $request->use_password;
+        $user->use_password = Hash::make($request->use_password);
         $user->update();
         return response()->json([
-            'status' => true,
-            'msg' => 'Updated successful',
+            'msg' => array('Updated successful'),
         ],200);
     }
 
     public function destroy($id)
     {
-        $user = User::find($id);
+        $user = User::find(11);
         $newStatus = ($user['use_status'] == 0) ? 1 : 0;
         $user->where('use_id',$id)
        ->update(['use_status'=>$newStatus]);

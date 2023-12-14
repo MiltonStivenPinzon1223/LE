@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Word;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -103,9 +104,9 @@ class WordController extends Controller
         $word2 = Word::inRandomOrder()->first();
         $word['word1'] = $word1['wor_english'];
         $word['word2'] = $word2['wor_english'];
-        return response()->json([
-            'status' => true,
-            'data' => $word
-        ]);
+        $category = Category::find($word['cat_id']);
+        $word['cat_id'] = $category['cat_category'];
+        $array = array("words"=>array($word));
+        return response()->json($array);
     }
 }
